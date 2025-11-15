@@ -64,7 +64,7 @@ export default function PreInterview() {
         <CardHeader className="space-y-3 text-center pb-4">
           <div className="flex justify-center mb-4">
             <img
-              src="/SystemaLogo.png"
+              src="/AceUpLogo.png"
               alt="SystemUOA Logo"
               className="h-20 w-auto"
             />

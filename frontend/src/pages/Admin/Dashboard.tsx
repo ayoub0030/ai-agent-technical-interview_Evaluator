@@ -107,7 +107,7 @@ export default function Dashboard() {
           candidateEmail: email,
           candidateName: email.split('@')[0], // Use email username as name
           assessmentId: assessmentId,
-          company: 'Systema'
+          company: 'AceUp'
         })
       });
 
@@ -180,8 +180,8 @@ export default function Dashboard() {
               }}
             >
               <img
-                src="/SystemaLogo.png"
-                alt="Systema Logo"
+                src="/AceUpLogo.png"
+                alt="AceUp Logo"
                 style={{ height: "45px", width: "auto" }}
               />
               <Box>
@@ -189,7 +189,7 @@ export default function Dashboard() {
                   variant="h5"
                   sx={{ fontWeight: 600, letterSpacing: 0.5 }}
                 >
-                  Systema
+                  AceUp
                 </Typography>
                 <Typography
                   variant="caption"

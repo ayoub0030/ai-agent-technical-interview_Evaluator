@@ -64,13 +64,13 @@ export default function Register() {
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-4">
             <img
-              src="/SystemaLogo.png"
+              src="/AceUpLogo.png"
               alt="SystemUOA Logo"
               className="h-20 w-auto"
             />
           </div>
           <CardTitle className="text-3xl font-bold tracking-tight text-white">
-            Systema
+            AceUp
           </CardTitle>
           <CardDescription className="text-base text-white">
             Recruiter Registration Portal
