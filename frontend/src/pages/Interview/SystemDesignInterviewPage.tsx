@@ -6,14 +6,35 @@ import SystemDesignInterview from './SystemDesignInterview';
 import { ProctoringMonitor } from '../../../../components/ProctoringMonitor';
 import { orchestrateGrading } from '@/services/grading.service';
 import { supabase } from '@/lib/supabase';
-import { useTranscription } from '@/hooks/useTranscription';
 
 const INTERVIEW_DURATION_MS = 45 * 60 * 1000; // 45 minutes
 
 const SystemDesignInterviewPage: React.FC = () => {
   const { interviewId } = useParams<{ interviewId: string }>();
   const navigate = useNavigate();
-  const conversation = useConversation();
+  
+  const [agentTranscription, setAgentTranscription] = useState<string>("");
+  const [userTranscription, setUserTranscription] = useState<string>("");
+  
+  // Handle incoming messages from ElevenLabs
+  const handleMessage = (message: any) => {
+    console.log('[Message Handler] Received message:', message);
+    
+    // ElevenLabs sends messages with role and text properties
+    if (message.role === 'agent' && message.text) {
+      console.log('[Message Handler] Agent transcription:', message.text);
+      setAgentTranscription(message.text);
+    } else if (message.role === 'user' && message.text) {
+      console.log('[Message Handler] User transcription:', message.text);
+      setUserTranscription(message.text);
+    }
+  };
+  
+  // Initialize conversation with onMessage callback
+  const conversation = useConversation({
+    onMessage: handleMessage
+  });
+  
   const timerIntervalRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
   const hasSubmittedRef = useRef(false); // Prevent duplicate submissions
@@ -24,9 +45,6 @@ const SystemDesignInterviewPage: React.FC = () => {
   const [countdown, setCountdown] = useState<number | null>(3); // Start with 3
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [isGrading, setIsGrading] = useState(false);
-  
-  // Use custom hook to capture transcription from ElevenLabs conversation
-  const { agentTranscription, userTranscription } = useTranscription(conversation);
 
   // Format time as MM:SS
   const formatTime = (ms: number): string => {
@@ -252,19 +270,15 @@ const handleStartConversation = async () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Log sendContextualUpdate availability and conversation object structure
+  // Log sendContextualUpdate availability
   useEffect(() => {
     if (conversation.status === 'connected') {
       console.log('[Conversation] sendContextualUpdate available:', !!conversation.sendContextualUpdate);
       if (!conversation.sendContextualUpdate) {
         console.warn('[Conversation] WARNING: sendContextualUpdate is not available!');
       }
-      
-      // Debug: Log conversation object structure to help identify message storage
-      console.log('[Conversation] Object keys:', Object.keys(conversation));
-      console.log('[Conversation] Full object:', conversation);
     }
-  }, [conversation.status, conversation.sendContextualUpdate, conversation]);
+  }, [conversation.status, conversation.sendContextualUpdate]);
 
   return (
     <div className="relative h-screen">
