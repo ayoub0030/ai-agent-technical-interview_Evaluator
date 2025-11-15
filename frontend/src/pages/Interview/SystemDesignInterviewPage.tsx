@@ -30,7 +30,7 @@ const SystemDesignInterviewPage: React.FC = () => {
     }
   };
   
-  // Initialize conversation with onMessage callback
+  // Initialize conversation with onMessage
   const conversation = useConversation({
     onMessage: handleMessage
   });
