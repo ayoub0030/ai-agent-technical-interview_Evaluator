@@ -20,13 +20,13 @@ const SystemDesignInterviewPage: React.FC = () => {
   const handleMessage = (message: any) => {
     console.log('[Message Handler] Received message:', message);
     
-    // ElevenLabs sends messages with role and text properties
-    if (message.role === 'agent' && message.text) {
-      console.log('[Message Handler] Agent transcription:', message.text);
-      setAgentTranscription(message.text);
-    } else if (message.role === 'user' && message.text) {
-      console.log('[Message Handler] User transcription:', message.text);
-      setUserTranscription(message.text);
+    // ElevenLabs sends messages with source and message properties
+    if (message.source === 'ai' && message.message) {
+      console.log('[Message Handler] Agent transcription:', message.message);
+      setAgentTranscription(message.message);
+    } else if (message.source === 'user' && message.message) {
+      console.log('[Message Handler] User transcription:', message.message);
+      setUserTranscription(message.message);
     }
   };
   

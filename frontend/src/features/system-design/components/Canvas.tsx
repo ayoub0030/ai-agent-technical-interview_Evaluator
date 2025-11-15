@@ -49,13 +49,13 @@ export const Canvas: React.FC<CanvasProps> = ({ sendContextualUpdate, agentTrans
 
   // Debug transcription data
   React.useEffect(() => {
-    if (agentTranscription || userTranscription) {
-      console.log('[Canvas] Transcription received:', {
-        agent: agentTranscription,
-        user: userTranscription,
-        isSpeaking
-      });
-    }
+    console.log('[Canvas] Transcription props:', {
+      agent: agentTranscription,
+      user: userTranscription,
+      isSpeaking,
+      hasAgent: !!agentTranscription,
+      hasUser: !!userTranscription
+    });
   }, [agentTranscription, userTranscription, isSpeaking]);
 
   // Use the conversation's sendContextualUpdate if available
