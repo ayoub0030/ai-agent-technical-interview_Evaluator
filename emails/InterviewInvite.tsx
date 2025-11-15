@@ -41,6 +41,10 @@ import {
             <Text style={tagline}>
               Hi {candidateName}, we’re excited to see how you architect solutions. This assessment was prepared by <strong>{companyName}</strong>.
             </Text>
+            <Text style={bodyText}>
+              You&apos;ve been invited to complete a system design interview for <strong>{companyName}</strong>.
+              This is an online assessment where you&apos;ll design a system architecture and explain your approach.
+            </Text>
 
             <Section style={grid}>
               <div style={gridItem}>
@@ -152,6 +156,15 @@ import {
     margin: '0 0 28px',
   }
 
+  const bodyText = {
+    color: '#e2e8f0',
+    fontSize: '15px',
+    lineHeight: '26px',
+    margin: '0 auto 28px',
+    maxWidth: '520px',
+    textAlign: 'center' as const,
+  }
+
   const grid = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
@@ -186,7 +199,6 @@ import {
     backgroundColor: 'rgba(4, 24, 42, 0.85)',
     border: '1px solid rgba(56,189,248,0.25)',
     borderRadius: '16px',
-    margin: '28px auto',
     margin: '28px 0',
     padding: '26px',
   }
