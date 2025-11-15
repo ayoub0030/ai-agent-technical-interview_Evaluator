@@ -56,11 +56,11 @@ export default function Problems({
       elevation={0}
       sx={{
         p: { xs: 3, md: 4 },
-        background: "rgba(20,20,25,0.7)",
-        backdropFilter: "blur(20px)",
-        border: "1px solid rgba(98,0,69,0.3)",
+        background: "rgba(4,12,29,0.82)",
+        backdropFilter: "blur(26px)",
+        border: "1px solid rgba(14,165,233,0.25)",
         borderRadius: 3,
-        boxShadow: "0 8px 32px rgba(98,0,69,0.2)",
+        boxShadow: "0 25px 60px rgba(15,118,187,0.18)",
         width: "100%",
       }}
     >
@@ -96,20 +96,20 @@ export default function Problems({
           sx={{
             minWidth: 220,
             ".MuiInputLabel-root": {
-              color: "rgba(255,255,255,0.75)",
+              color: "rgba(224,242,254,0.8)",
               "&.Mui-focused": {
-                color: "rgba(255,255,255,0.9)", // <-- keeps label white when focused
+                color: "rgba(125,211,252,0.95)",
               },
             },
             ".MuiOutlinedInput-root": {
-              background: "rgba(0,0,0,0.35)",
+              background: "rgba(2,8,23,0.55)",
               borderRadius: 2,
-              "&:hover fieldset": { borderColor: "rgba(98,0,69,0.8)" },
-              "&.Mui-focused fieldset": { borderColor: "rgba(98,0,69,1)" },
+              "&:hover fieldset": { borderColor: "rgba(14,165,233,0.7)" },
+              "&.Mui-focused fieldset": { borderColor: "rgba(56,189,248,0.9)" },
             },
           }}
         >
-          <InputLabel sx={{ color: "rgba(255,255,255,0.75)" }}>
+          <InputLabel sx={{ color: "rgba(224,242,254,0.8)" }}>
             Difficulty
           </InputLabel>
           <Select
@@ -119,27 +119,27 @@ export default function Problems({
             sx={{
               color: "white",
               ".MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgba(98,0,69,0.5)",
+                borderColor: "rgba(14,165,233,0.4)",
               },
               "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgba(98,0,69,0.8)",
+                borderColor: "rgba(14,165,233,0.7)",
               },
               "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgba(98,0,69,1)",
+                borderColor: "rgba(56,189,248,0.9)",
               },
               ".MuiSvgIcon-root": { color: "white" },
             }}
             MenuProps={{
               PaperProps: {
                 sx: {
-                  background: "rgba(20,20,25,0.95)",
-                  backdropFilter: "blur(20px)",
-                  border: "1px solid rgba(98,0,69,0.35)",
+                  background: "rgba(3,14,30,0.98)",
+                  backdropFilter: "blur(24px)",
+                  border: "1px solid rgba(14,165,233,0.35)",
                   color: "white", // <-- makes text inside dropdown white
                   "& .MuiMenuItem-root": {
                     color: "white", // ensures all items stay white
-                    "&.Mui-selected": { background: "rgba(98,0,69,0.4)" },
-                    "&:hover": { background: "rgba(98,0,69,0.3)" },
+                    "&.Mui-selected": { background: "rgba(56,189,248,0.35)" },
+                    "&:hover": { background: "rgba(14,165,233,0.25)" },
                   },
                 },
               },
@@ -220,7 +220,6 @@ function ProblemCard({
     closeDialog();
   };
 
-  // Explicit arrow click handler so it toggles reliably
   const handleExpandClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onToggle();
@@ -232,19 +231,19 @@ function ProblemCard({
       sx={{
         width: "100%",
         background:
-          "linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(20,0,15,0.6) 100%)",
-        border: "1px solid rgba(98,0,69,0.35)",
+          "linear-gradient(135deg, rgba(3,12,30,0.8) 0%, rgba(2,24,44,0.9) 100%)",
+        border: "1px solid rgba(56,189,248,0.25)",
         borderRadius: 2,
         transition: "all 0.25s ease",
         "&:hover": {
-          borderColor: "rgba(98,0,69,0.7)",
+          borderColor: "rgba(56,189,248,0.6)",
           transform: "translateY(-2px)",
+          boxShadow: "0 12px 30px rgba(15,118,187,0.25)",
         },
         cursor: "pointer",
       }}
       onClick={onToggle}
     >
-      {/* Header row (collapsed: no description) */}
       <CardContent sx={{ pb: 1.5, pt: 2.5 }}>
         <Box
           sx={{
@@ -276,9 +275,9 @@ function ProblemCard({
             size="small"
             sx={{
               fontWeight: 700,
-              bgcolor: "rgba(98,0,69,0.9)",
-              color: "white",
-              border: "1px solid rgba(98,0,69,1)",
+              bgcolor: "rgba(56,189,248,0.25)",
+              color: "#e0f2fe",
+              border: "1px solid rgba(14,165,233,0.6)",
             }}
           />
 
@@ -292,16 +291,15 @@ function ProblemCard({
               disabled={sending}
               sx={{
                 color: "white",
-                bgcolor: "rgba(98,0,69,0.5)",
-                border: "1px solid rgba(98,0,69,0.7)",
-                "&:hover": { bgcolor: "rgba(98,0,69,0.8)" },
+                bgcolor: "rgba(14,165,233,0.25)",
+                border: "1px solid rgba(14,165,233,0.45)",
+                "&:hover": { bgcolor: "rgba(14,165,233,0.45)" },
               }}
               size="small"
             >
               <ArrowForwardIcon fontSize="small" />
             </IconButton>
 
-            {/* Expand arrow explicitly toggles */}
             <IconButton
               aria-label="Expand"
               onClick={handleExpandClick}
@@ -318,19 +316,18 @@ function ProblemCard({
         </Box>
       </CardContent>
 
-      {/* Expandable details */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Divider sx={{ opacity: 0.2 }} />
         <CardContent sx={{ pt: 2.5 }}>
           <Typography
             variant="subtitle2"
-            sx={{ color: "rgba(255,255,255,0.9)", mb: 1, fontWeight: 700 }}
+            sx={{ color: "rgba(224,242,254,0.9)", mb: 1, fontWeight: 700 }}
           >
             Description
           </Typography>
           <Typography
             variant="body1"
-            sx={{ color: "rgba(255,255,255,0.86)", whiteSpace: "pre-line" }}
+            sx={{ color: "rgba(226,232,240,0.9)", whiteSpace: "pre-line" }}
           >
             {problem.description || "No description provided."}
           </Typography>
@@ -350,12 +347,13 @@ function ProblemCard({
             }}
             disabled={sending}
             sx={{
-              bgcolor: "rgba(98,0,69,0.95)",
+              backgroundImage: "linear-gradient(90deg,#0ea5e9,#2563eb)",
               textTransform: "none",
               borderRadius: 1.5,
               fontWeight: 700,
               px: 2.5,
-              "&:hover": { bgcolor: "rgba(98,0,69,1)" },
+              boxShadow: "0 8px 24px rgba(3,105,161,0.35)",
+              "&:hover": { filter: "brightness(1.05)" },
             }}
           >
             {sending ? "Sending…" : "Send assessment"}
@@ -363,10 +361,8 @@ function ProblemCard({
         </CardActions>
       </Collapse>
 
-      {/* Send dialog (styled like the cards) */}
       <Dialog
         open={dialogOpen}
-        // Block closing while sending so UI doesn't jitter
         onClose={(_, reason) => {
           if (
             sending &&
@@ -382,10 +378,10 @@ function ProblemCard({
         maxWidth="sm"
         PaperProps={{
           sx: {
-            background: "rgba(20,20,25,0.95)",
-            backdropFilter: "blur(25px)",
-            border: "1px solid rgba(98,0,69,0.4)",
-            boxShadow: "0 8px 32px rgba(98,0,69,0.45)",
+            background: "rgba(4,12,29,0.95)",
+            backdropFilter: "blur(28px)",
+            border: "1px solid rgba(56,189,248,0.3)",
+            boxShadow: "0 18px 45px rgba(15,118,187,0.35)",
             borderRadius: 2,
           },
         }}
@@ -403,7 +399,7 @@ function ProblemCard({
         <DialogContent
           dividers
           sx={{
-            borderColor: "rgba(98,0,69,0.25)",
+            borderColor: "rgba(14,165,233,0.25)",
             color: "rgba(255,255,255,0.9)",
             pt: 2,
           }}
@@ -416,54 +412,41 @@ function ProblemCard({
             fullWidth
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            // 👇 keep the field enabled; just block edits while sending
             inputProps={{ readOnly: sending }}
-            // Optional: show busy state for screen readers
             slotProps={{ input: { "aria-busy": sending } as any }}
             sx={{
               mt: 1,
-              // Label colors
               "& .MuiInputLabel-root": {
-                color: "rgba(255,255,255,0.75)",
-                "&.Mui-focused": { color: "rgba(255,180,220,0.95)" },
-                "&.Mui-error": { color: "#ff7373" },
+                color: "rgba(224,242,254,0.75)",
+                "&.Mui-focused": { color: "rgba(125,211,252,0.95)" },
+                "&.Mui-error": { color: "#f87171" },
               },
-
-              // Outlined root
               "& .MuiOutlinedInput-root": {
                 color: "white",
-                backgroundColor: "rgba(255,255,255,0.06)",
+                backgroundColor: "rgba(2,8,23,0.6)",
                 borderRadius: 1.5,
                 transition: "border-color .2s, box-shadow .2s, background-color .2s",
-
-                // Border / outline
-                "& fieldset": { borderColor: "rgba(255,255,255,0.18)" },
-                "&:hover fieldset": { borderColor: "rgba(255,255,255,0.3)" },
+                "& fieldset": { borderColor: "rgba(226,232,240,0.2)" },
+                "&:hover fieldset": { borderColor: "rgba(56,189,248,0.5)" },
                 "&.Mui-focused fieldset": {
-                  borderColor: "rgba(255,180,220,0.95)",
-                  boxShadow: "0 0 0 3px rgba(255,180,220,0.25)",
+                  borderColor: "rgba(14,165,233,0.95)",
+                  boxShadow: "0 0 0 3px rgba(14,165,233,0.28)",
                 },
-
-                // Input text + placeholder
                 "& input": {
                   fontWeight: 600,
-                  "::placeholder": { color: "rgba(255,255,255,0.55)", opacity: 1 },
+                  "::placeholder": { color: "rgba(224,242,254,0.55)", opacity: 1 },
                 },
-
-                // Readonly (when sending)
                 "&.MuiInputBase-readOnly": {
-                  backgroundColor: "rgba(255,255,255,0.05)",
-                  "& fieldset": { borderColor: "rgba(255,255,255,0.18)" },
+                  backgroundColor: "rgba(2,8,23,0.5)",
+                  "& fieldset": { borderColor: "rgba(226,232,240,0.2)" },
                   cursor: "default",
                 },
               },
-
-              // Kill Chrome autofill yellow on dark background
               "& input:-webkit-autofill": {
                 WebkitTextFillColor: "#fff",
                 transition: "background-color 9999s ease-out",
-                WebkitBoxShadow: "0 0 0px 1000px rgba(255,255,255,0.06) inset",
-                boxShadow: "0 0 0px 1000px rgba(255,255,255,0.06) inset",
+                WebkitBoxShadow: "0 0 0px 1000px rgba(2,8,23,0.5) inset",
+                boxShadow: "0 0 0px 1000px rgba(2,8,23,0.5) inset",
               },
             }}
           />
@@ -473,7 +456,7 @@ function ProblemCard({
           sx={{
             px: 3,
             py: 2,
-            borderTop: "1px solid rgba(98,0,69,0.25)",
+            borderTop: "1px solid rgba(56,189,248,0.2)",
             gap: 1,
           }}
         >
@@ -481,7 +464,7 @@ function ProblemCard({
             onClick={closeDialog}
             variant="text"
             disabled={sending}
-            sx={{ color: "rgba(255,255,255,0.85)" }}
+            sx={{ color: "rgba(224,242,254,0.85)" }}
           >
             Cancel
           </Button>
@@ -495,24 +478,27 @@ function ProblemCard({
               sending ? <CircularProgress size={16} sx={{ color: "white" }} /> : undefined
             }
             sx={{
-              bgcolor: sending ? "rgba(98,0,69,0.65)" : "rgba(98,0,69,0.95)",
+              backgroundImage: sending
+                ? "linear-gradient(90deg,rgba(14,165,233,0.6),rgba(37,99,235,0.6))"
+                : "linear-gradient(90deg,#0ea5e9,#2563eb)",
               textTransform: "none",
               borderRadius: 1.5,
               fontWeight: 700,
               px: 2.5,
               minWidth: 180,
               color: "white",
+              boxShadow: sending
+                ? "none"
+                : "0 12px 28px rgba(3,105,161,0.35)",
               "&.Mui-disabled": {
                 color: "white",
-                opacity: 1, // prevent dark fade
-                bgcolor: "rgba(98,0,69,0.4)", // subtle contrast instead of blackout
+                opacity: 1,
               },
-              "&:hover": { bgcolor: "rgba(98,0,69,1)" },
+              "&:hover": { filter: "brightness(1.05)" },
             }}
           >
             {sending ? "Sending" : "Send assessment"}
           </Button>
-
         </DialogActions>
       </Dialog>
     </Card>

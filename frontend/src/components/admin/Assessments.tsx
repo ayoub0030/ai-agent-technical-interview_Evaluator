@@ -38,11 +38,11 @@ export default function Assessments({ completed, incomplete }: Props) {
       elevation={0}
       sx={{
         p: { xs: 3, md: 4 },
-        background: 'rgba(20,20,25,0.7)',
-        backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(98,0,69,0.3)',
+        background: 'rgba(4,12,29,0.82)',
+        backdropFilter: 'blur(26px)',
+        border: '1px solid rgba(14,165,233,0.25)',
         borderRadius: 3,
-        boxShadow: '0 8px 32px rgba(98,0,69,0.2)',
+        boxShadow: '0 25px 60px rgba(15,118,187,0.18)',
       }}
     >
       {/* Header */}
@@ -84,16 +84,16 @@ export default function Assessments({ completed, incomplete }: Props) {
           value={tab}
           onChange={(_, v) => setTab(v)}
           textColor="inherit"
-          TabIndicatorProps={{ sx: { backgroundColor: 'rgba(98,0,69,1)' } }}
+          TabIndicatorProps={{ sx: { backgroundColor: '#38bdf8' } }}
           sx={{
             minHeight: 40,
             '.MuiTab-root': {
               minHeight: 40,
-              color: 'rgba(255,255,255,0.7)',
+              color: 'rgba(224,242,254,0.6)',
               textTransform: 'none',
               fontWeight: 600,
               px: 2,
-              '&.Mui-selected': { color: 'white' },
+              '&.Mui-selected': { color: '#e0f2fe' },
             },
           }}
         >
@@ -107,7 +107,7 @@ export default function Assessments({ completed, incomplete }: Props) {
         sx={{
           borderRadius: 2,
           overflow: 'hidden',
-          border: '1px solid rgba(98,0,69,0.3)',
+          border: '1px solid rgba(14,165,233,0.2)',
         }}
       >
         <TableContainer
@@ -115,13 +115,13 @@ export default function Assessments({ completed, incomplete }: Props) {
             maxHeight: 520,
             '&::-webkit-scrollbar': { width: 8 },
             '&::-webkit-scrollbar-track': {
-              background: 'rgba(255,255,255,0.05)',
+              background: 'rgba(148,163,184,0.08)',
               borderRadius: 8,
             },
             '&::-webkit-scrollbar-thumb': {
-              background: 'rgba(98,0,69,0.5)',
+              background: 'rgba(14,165,233,0.4)',
               borderRadius: 8,
-              '&:hover': { background: 'rgba(98,0,69,0.7)' },
+              '&:hover': { background: 'rgba(14,165,233,0.6)' },
             },
           }}
         >
@@ -269,14 +269,14 @@ const thSx = {
   position: 'sticky' as const,
   top: 0,
   zIndex: 1,
-  bgcolor: 'rgba(0,0,0,0.6)',
-  backdropFilter: 'blur(12px)',
-  color: 'rgba(255,255,255,0.85)',
+  bgcolor: 'rgba(1,8,20,0.75)',
+  backdropFilter: 'blur(18px)',
+  color: 'rgba(224,242,254,0.85)',
   fontWeight: 700,
-  borderBottom: '1px solid rgba(98,0,69,0.35)',
+  borderBottom: '1px solid rgba(14,165,233,0.25)',
 };
 
 const tdSx = {
-  color: 'white',
-  borderBottom: '1px solid rgba(98,0,69,0.2)',
+  color: 'rgba(226,232,240,0.9)',
+  borderBottom: '1px solid rgba(14,165,233,0.15)',
 };

@@ -142,7 +142,7 @@ export default function Dashboard() {
       sx={{
         minHeight: "100vh",
         background:
-          "linear-gradient(135deg, #1a0b14 0%, #0a0a0a 50%, #120520 100%)",
+          "linear-gradient(135deg, #010617 0%, #041227 45%, #00111f 100%)",
         position: "relative",
         overflow: "auto",
         overscrollBehavior: "none",
@@ -154,7 +154,7 @@ export default function Dashboard() {
           position: "fixed",
           inset: 0,
           backgroundImage:
-            "radial-gradient(circle at 20% 50%, rgba(98,0,69,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(98,0,69,0.15) 0%, transparent 50%)",
+            "radial-gradient(circle at 20% 40%, rgba(14,165,233,0.18) 0%, transparent 45%), radial-gradient(circle at 80% 75%, rgba(8,145,178,0.2) 0%, transparent 45%)",
           zIndex: 0,
           pointerEvents: "none",
         }}
@@ -165,9 +165,9 @@ export default function Dashboard() {
           position="static"
           elevation={0}
           sx={{
-            bgcolor: "rgba(0,0,0,0.4)",
-            backdropFilter: "blur(20px)",
-            borderBottom: "1px solid rgba(255,255,255,0.1)",
+            bgcolor: "rgba(2,8,23,0.7)",
+            backdropFilter: "blur(24px)",
+            borderBottom: "1px solid rgba(56,189,248,0.2)",
           }}
         >
           <Toolbar sx={{ py: 1 }}>
@@ -205,10 +205,10 @@ export default function Dashboard() {
               sx={{
                 borderRadius: 2,
                 px: 3,
-                border: "1px solid rgba(255,255,255,0.2)",
+                border: "1px solid rgba(14,165,233,0.4)",
                 "&:hover": {
-                  bgcolor: "rgba(98,0,69,0.3)",
-                  borderColor: "rgba(98,0,69,0.5)",
+                  bgcolor: "rgba(14,165,233,0.15)",
+                  borderColor: "rgba(14,165,233,0.6)",
                 },
               }}
             >
