@@ -154,9 +154,10 @@ import {
 
   const grid = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
     gap: '16px',
-    marginBottom: '28px',
+    margin: '0 auto 28px',
+    maxWidth: '520px',
   }
 
   const gridItem = {
@@ -164,14 +165,15 @@ import {
     borderRadius: '14px',
     border: '1px solid rgba(148,163,184,0.18)',
     background: 'rgba(2, 20, 39, 0.7)',
+    textAlign: 'center' as const,
   }
 
   const gridLabel = {
     color: 'rgba(148,163,184,0.9)',
-    fontSize: '13px',
+    fontSize: '12px',
     textTransform: 'uppercase' as const,
-    letterSpacing: '0.08em',
-    marginBottom: '8px',
+    letterSpacing: '0.1em',
+    marginBottom: '6px',
   }
 
   const gridValue = {
@@ -184,6 +186,7 @@ import {
     backgroundColor: 'rgba(4, 24, 42, 0.85)',
     border: '1px solid rgba(56,189,248,0.25)',
     borderRadius: '16px',
+    margin: '28px auto',
     margin: '28px 0',
     padding: '26px',
   }
