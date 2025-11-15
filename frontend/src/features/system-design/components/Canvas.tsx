@@ -28,9 +28,12 @@ import { useDiagramElevenSync } from "@/hooks/useDiagramElevenSync";
 
 interface CanvasProps {
   sendContextualUpdate?: (message: string) => void;
+  agentTranscription?: string;
+  userTranscription?: string;
+  isSpeaking?: boolean;
 }
 
-export const Canvas: React.FC<CanvasProps> = ({ sendContextualUpdate }) => {
+export const Canvas: React.FC<CanvasProps> = ({ sendContextualUpdate, agentTranscription, userTranscription, isSpeaking }) => {
   const [nodes, setNodes, onNodesChange] = useNodesState<MyNode>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<MyEdge>([]);
   const [edgeKind, setEdgeKind] = useState<EdgeKind>("arrow");
@@ -212,6 +215,39 @@ export const Canvas: React.FC<CanvasProps> = ({ sendContextualUpdate }) => {
         >
           Sync to ElevenLabs
         </button> */}
+
+        {/* Closed Caption Bar */}
+        {(agentTranscription || userTranscription) && (
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/90 to-black/80 border-t border-sky-500/30 backdrop-blur-md">
+            <div className="max-w-6xl mx-auto px-6 py-4 space-y-2">
+              {/* Agent Transcription */}
+              {agentTranscription && (
+                <div className="flex gap-3 items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className={`w-2 h-2 rounded-full ${isSpeaking ? 'bg-sky-400 animate-pulse' : 'bg-sky-300'}`} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-sky-300 uppercase tracking-wider mb-1">AI Interviewer</p>
+                    <p className="text-sm text-white/90 leading-relaxed break-words">{agentTranscription}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* User Transcription */}
+              {userTranscription && (
+                <div className="flex gap-3 items-start">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-emerald-300 uppercase tracking-wider mb-1">You</p>
+                    <p className="text-sm text-white/80 leading-relaxed break-words italic">{userTranscription}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
