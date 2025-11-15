@@ -47,6 +47,17 @@ export const Canvas: React.FC<CanvasProps> = ({ sendContextualUpdate, agentTrans
     console.log('[Canvas] sendContextualUpdate available:', !!sendContextualUpdate);
   }, [sendContextualUpdate]);
 
+  // Debug transcription data
+  React.useEffect(() => {
+    if (agentTranscription || userTranscription) {
+      console.log('[Canvas] Transcription received:', {
+        agent: agentTranscription,
+        user: userTranscription,
+        isSpeaking
+      });
+    }
+  }, [agentTranscription, userTranscription, isSpeaking]);
+
   // Use the conversation's sendContextualUpdate if available
   const { start, stop, pushNow } = useDiagramElevenSync({
     sendContextualUpdate,

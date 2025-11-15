@@ -6,6 +6,7 @@ import SystemDesignInterview from './SystemDesignInterview';
 import { ProctoringMonitor } from '../../../../components/ProctoringMonitor';
 import { orchestrateGrading } from '@/services/grading.service';
 import { supabase } from '@/lib/supabase';
+import { useTranscription } from '@/hooks/useTranscription';
 
 const INTERVIEW_DURATION_MS = 45 * 60 * 1000; // 45 minutes
 
@@ -23,8 +24,9 @@ const SystemDesignInterviewPage: React.FC = () => {
   const [countdown, setCountdown] = useState<number | null>(3); // Start with 3
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [isGrading, setIsGrading] = useState(false);
-  const [agentTranscription, setAgentTranscription] = useState<string>("");
-  const [userTranscription, setUserTranscription] = useState<string>("");
+  
+  // Use custom hook to capture transcription from ElevenLabs conversation
+  const { agentTranscription, userTranscription } = useTranscription(conversation);
 
   // Format time as MM:SS
   const formatTime = (ms: number): string => {
@@ -259,28 +261,6 @@ const handleStartConversation = async () => {
       }
     }
   }, [conversation.status, conversation.sendContextualUpdate]);
-
-  // Listen for transcription updates from ElevenLabs conversation
-  useEffect(() => {
-    const handleTranscription = (event: any) => {
-      // ElevenLabs sends transcription events with agent and user messages
-      if (event.type === 'agent_response' || event.message?.role === 'agent') {
-        setAgentTranscription(event.message?.text || event.text || "");
-      } else if (event.type === 'user_message' || event.message?.role === 'user') {
-        setUserTranscription(event.message?.text || event.text || "");
-      }
-    };
-
-    // Try to attach listener if conversation object supports it
-    if (conversation && typeof (conversation as any).on === 'function') {
-      (conversation as any).on('transcription', handleTranscription);
-      return () => {
-        if (typeof (conversation as any).off === 'function') {
-          (conversation as any).off('transcription', handleTranscription);
-        }
-      };
-    }
-  }, [conversation]);
 
   return (
     <div className="relative h-screen">
