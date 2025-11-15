@@ -1,93 +1,67 @@
 import { useEffect, useState, useRef } from 'react';
 
-interface TranscriptionMessage {
-  role: 'agent' | 'user';
-  text: string;
-  timestamp: number;
-}
-
 /**
  * Custom hook to capture real-time transcription from ElevenLabs conversation
- * Monitors the conversation object for message events
+ * Uses the conversation object's internal message history
  */
 export function useTranscription(conversation: any) {
   const [agentTranscription, setAgentTranscription] = useState<string>("");
   const [userTranscription, setUserTranscription] = useState<string>("");
-  const messagesRef = useRef<TranscriptionMessage[]>([]);
   const lastAgentMessageRef = useRef<string>("");
   const lastUserMessageRef = useRef<string>("");
 
   useEffect(() => {
     if (!conversation) return;
 
-    // Create a message handler that intercepts WebRTC messages
-    const handleMessage = (event: any) => {
-      console.log('[Transcription] Message event:', event);
-      
-      if (event.message) {
-        const { role, text } = event.message;
-        
-        if (role === 'agent' && text && text !== lastAgentMessageRef.current) {
-          console.log('[Transcription] Agent:', text);
-          lastAgentMessageRef.current = text;
-          setAgentTranscription(text);
-        } else if (role === 'user' && text && text !== lastUserMessageRef.current) {
-          console.log('[Transcription] User:', text);
-          lastUserMessageRef.current = text;
-          setUserTranscription(text);
-        }
-      }
-    };
-
-    // Try multiple approaches to attach listeners
-    
-    // Approach 1: Direct event listener on conversation object
-    if (typeof (conversation as any).addEventListener === 'function') {
-      (conversation as any).addEventListener('message', handleMessage);
-      console.log('[Transcription] Attached via addEventListener');
-    }
-    
-    // Approach 2: Using .on() method if available
-    if (typeof (conversation as any).on === 'function') {
-      (conversation as any).on('message', handleMessage);
-      (conversation as any).on('agent_response', handleMessage);
-      (conversation as any).on('user_message', handleMessage);
-      console.log('[Transcription] Attached via .on()');
-    }
-
-    // Approach 3: Poll the conversation object for message history
+    // Poll the conversation object for the latest messages
+    // ElevenLabs stores messages in an internal state that we can access
     const pollInterval = setInterval(() => {
-      // Check if conversation has a messages property
-      if ((conversation as any).messages && Array.isArray((conversation as any).messages)) {
-        const messages = (conversation as any).messages;
+      try {
+        // Try to access conversation messages through different possible properties
+        let messages: any[] = [];
+        
+        // Check multiple possible properties where messages might be stored
+        if ((conversation as any).messages && Array.isArray((conversation as any).messages)) {
+          messages = (conversation as any).messages;
+        } else if ((conversation as any).history && Array.isArray((conversation as any).history)) {
+          messages = (conversation as any).history;
+        } else if ((conversation as any).conversationHistory && Array.isArray((conversation as any).conversationHistory)) {
+          messages = (conversation as any).conversationHistory;
+        }
+
         if (messages.length > 0) {
-          const lastMessage = messages[messages.length - 1];
-          
-          if (lastMessage.role === 'agent' && lastMessage.text !== lastAgentMessageRef.current) {
-            console.log('[Transcription] Agent (from poll):', lastMessage.text);
-            lastAgentMessageRef.current = lastMessage.text;
-            setAgentTranscription(lastMessage.text);
-          } else if (lastMessage.role === 'user' && lastMessage.text !== lastUserMessageRef.current) {
-            console.log('[Transcription] User (from poll):', lastMessage.text);
-            lastUserMessageRef.current = lastMessage.text;
-            setUserTranscription(lastMessage.text);
+          // Get the last few messages to find agent and user transcriptions
+          for (let i = messages.length - 1; i >= Math.max(0, messages.length - 5); i--) {
+            const msg = messages[i];
+            
+            // Check for agent message
+            if ((msg.role === 'agent' || msg.type === 'agent_response') && msg.message) {
+              const text = typeof msg.message === 'string' ? msg.message : msg.message.text || msg.message;
+              if (text && text !== lastAgentMessageRef.current) {
+                console.log('[Transcription] Agent:', text);
+                lastAgentMessageRef.current = text;
+                setAgentTranscription(text);
+              }
+            }
+            
+            // Check for user message
+            if ((msg.role === 'user' || msg.type === 'user_message') && msg.message) {
+              const text = typeof msg.message === 'string' ? msg.message : msg.message.text || msg.message;
+              if (text && text !== lastUserMessageRef.current) {
+                console.log('[Transcription] User:', text);
+                lastUserMessageRef.current = text;
+                setUserTranscription(text);
+              }
+            }
           }
         }
+      } catch (error) {
+        console.error('[Transcription] Error polling messages:', error);
       }
-    }, 500);
+    }, 300); // Poll more frequently for real-time feel
 
     return () => {
       clearInterval(pollInterval);
-      
-      // Cleanup listeners
-      if (typeof (conversation as any).removeEventListener === 'function') {
-        (conversation as any).removeEventListener('message', handleMessage);
-      }
-      if (typeof (conversation as any).off === 'function') {
-        (conversation as any).off('message', handleMessage);
-        (conversation as any).off('agent_response', handleMessage);
-        (conversation as any).off('user_message', handleMessage);
-      }
     };
   }, [conversation]);
 

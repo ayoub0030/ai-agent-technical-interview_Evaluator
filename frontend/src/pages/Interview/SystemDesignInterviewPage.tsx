@@ -252,15 +252,19 @@ const handleStartConversation = async () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Log sendContextualUpdate availability
+  // Log sendContextualUpdate availability and conversation object structure
   useEffect(() => {
     if (conversation.status === 'connected') {
       console.log('[Conversation] sendContextualUpdate available:', !!conversation.sendContextualUpdate);
       if (!conversation.sendContextualUpdate) {
         console.warn('[Conversation] WARNING: sendContextualUpdate is not available!');
       }
+      
+      // Debug: Log conversation object structure to help identify message storage
+      console.log('[Conversation] Object keys:', Object.keys(conversation));
+      console.log('[Conversation] Full object:', conversation);
     }
-  }, [conversation.status, conversation.sendContextualUpdate]);
+  }, [conversation.status, conversation.sendContextualUpdate, conversation]);
 
   return (
     <div className="relative h-screen">
