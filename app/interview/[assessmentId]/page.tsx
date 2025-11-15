@@ -101,26 +101,22 @@ export default function PreInterviewPage() {
         }
       `}</style>
 
-      <div className="min-h-screen bg-[#010617] relative overflow-hidden flex items-center justify-center p-6">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#010617] via-[#031a32] to-[#001524]" />
-        <div className="absolute -top-20 -right-10 w-80 h-80 bg-sky-500/20 blur-[140px] rounded-full" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-400/10 blur-[180px] rounded-full" />
-        <div className="relative max-w-3xl w-full">
+      <div className="min-h-screen bg-black flex items-center justify-center p-6">
+        <div className="max-w-3xl w-full">
           {/* Header */}
           <div
-            className={`bg-gradient-to-r from-[#061635]/80 via-[#031f3f]/80 to-[#041931]/80 border border-cyan-400/20 rounded-t-2xl p-6 shadow-[0_30px_80px_rgba(2,12,27,0.7)] ${mounted ? 'float-in' : 'opacity-0'}`}
+            className={`bg-black border border-white/20 rounded-t-lg p-6 ${mounted ? 'float-in' : 'opacity-0'}`}
             style={{ animationDelay: '0ms' }}
           >
             <div className="text-center">
-              <svg className="w-12 h-12 text-sky-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-10 h-10 text-white mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <h1 className="text-3xl font-bold text-white tracking-tight mb-2">
+              <h1 className="text-3xl font-bold text-white mb-2">
                 System Design Interview
               </h1>
-              <p className="text-sm text-slate-300 mb-4">Complete the pre-flight checks before entering your workspace.</p>
-              <div className="inline-flex items-center space-x-2 border border-cyan-300/30 px-3 py-1.5 rounded-full bg-white/5">
-                <span className="text-xs text-cyan-100/80 uppercase tracking-[0.2em]">Assessment ID</span>
+              <div className="inline-flex items-center space-x-2 border border-white/20 px-3 py-1.5 rounded">
+                <span className="text-xs text-gray-400">Assessment ID:</span>
                 <span className="font-mono text-xs text-white">{assessmentId}</span>
               </div>
             </div>
@@ -128,18 +124,18 @@ export default function PreInterviewPage() {
 
           {/* Main Content */}
           <div
-            className={`bg-[#030c1d]/70 border-x border-cyan-400/15 p-6 space-y-5 backdrop-blur-2xl ${mounted ? 'float-in' : 'opacity-0'}`}
+            className={`bg-black border-x border-white/20 p-6 space-y-5 ${mounted ? 'float-in' : 'opacity-0'}`}
             style={{ animationDelay: '100ms' }}
           >
             {/* Welcome Message */}
-            <div className="border border-cyan-300/20 rounded-2xl p-4 bg-white/5">
+            <div className="border border-white/20 rounded p-4">
               <div className="flex items-start space-x-3">
-                <svg className="w-5 h-5 text-sky-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
                   <h2 className="font-semibold text-white text-sm mb-1">Before You Begin</h2>
-                  <p className="text-slate-300 text-xs leading-relaxed">
+                  <p className="text-gray-400 text-xs leading-relaxed">
                     Please complete the checklist below to ensure the best interview experience.
                   </p>
                 </div>
@@ -152,7 +148,7 @@ export default function PreInterviewPage() {
               style={{ animationDelay: '250ms' }}
             >
               <h3 className="text-base font-semibold text-white flex items-center">
-                <span className="bg-gradient-to-r from-sky-500 to-cyan-400 text-black w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mr-2">
+                <span className="bg-white text-black w-6 h-6 rounded flex items-center justify-center text-xs font-bold mr-2">
                   ✓
                 </span>
                 System Requirements
@@ -160,10 +156,10 @@ export default function PreInterviewPage() {
 
               <div className="space-y-3">
                 {/* Camera & Mic */}
-                <div className={`border rounded-2xl p-4 transition-all ${
+                <div className={`border rounded p-4 transition-all ${
                   hasCamera && hasMicrophone
-                    ? 'border-cyan-300/40 bg-cyan-400/10'
-                    : 'border-cyan-200/20 bg-white/5'
+                    ? 'border-white bg-white/5'
+                    : 'border-white/20'
                 }`}>
                   <label className="flex items-start space-x-3 cursor-pointer">
                     <div className="flex-shrink-0 mt-0.5">
@@ -185,7 +181,7 @@ export default function PreInterviewPage() {
                     </div>
                     <div className="flex-1" onClick={!hasCamera || !hasMicrophone ? checkPermissions : undefined}>
                       <div className="flex items-center space-x-2 mb-1">
-                        <svg className="w-4 h-4 text-sky-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                         <span className="font-medium text-white text-sm">Camera & Microphone Access</span>
@@ -195,7 +191,7 @@ export default function PreInterviewPage() {
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-slate-300 leading-relaxed">
+                      <p className="text-xs text-gray-400 leading-relaxed">
                         Required for proctoring and voice explanation
                       </p>
                     </div>
@@ -203,10 +199,10 @@ export default function PreInterviewPage() {
                 </div>
 
                 {/* Ready */}
-                <div className={`border rounded-2xl p-4 transition-all ${
+                <div className={`border rounded p-4 transition-all ${
                   isReady
-                    ? 'border-cyan-300/40 bg-cyan-400/10'
-                    : 'border-cyan-200/20 bg-white/5'
+                    ? 'border-white bg-white/5'
+                    : 'border-white/20'
                 }`}>
                   <label className="flex items-start space-x-3 cursor-pointer">
                     <div className="flex-shrink-0 mt-0.5">
@@ -227,7 +223,7 @@ export default function PreInterviewPage() {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
-                        <svg className="w-4 h-4 text-sky-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span className="font-medium text-white text-sm">I am ready to begin</span>
@@ -237,7 +233,7 @@ export default function PreInterviewPage() {
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-slate-300 leading-relaxed">
+                      <p className="text-xs text-gray-400 leading-relaxed">
                         Quiet environment with stable internet
                       </p>
                     </div>
@@ -248,34 +244,34 @@ export default function PreInterviewPage() {
 
             {/* Guidelines */}
             <div
-              className={`border border-cyan-400/20 rounded-2xl p-4 bg-white/5 ${mounted ? 'float-in' : 'opacity-0'}`}
+              className={`border border-white/20 rounded p-4 ${mounted ? 'float-in' : 'opacity-0'}`}
               style={{ animationDelay: '400ms' }}
             >
               <div className="flex items-start space-x-3">
-                <svg className="w-4 h-4 text-sky-200 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-white flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
                 <div>
                   <h3 className="font-semibold text-white text-sm mb-2">Important Guidelines</h3>
-                  <ul className="space-y-1.5 text-xs text-slate-300">
+                  <ul className="space-y-1.5 text-xs text-gray-400">
                     <li className="flex items-start">
-                      <span className="text-sky-200 mr-2">•</span>
+                      <span className="text-white mr-2">•</span>
                       <span><strong className="text-white">45-minute time limit</strong> - Auto-submit when expired</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-sky-200 mr-2">•</span>
+                      <span className="text-white mr-2">•</span>
                       <span><strong className="text-white">Single attempt</strong> - Cannot retake assessment</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-sky-200 mr-2">•</span>
+                      <span className="text-white mr-2">•</span>
                       <span><strong className="text-white">Stay in frame</strong> - Face clearly visible</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-sky-200 mr-2">•</span>
+                      <span className="text-white mr-2">•</span>
                       <span><strong className="text-white">No tab switching</strong> - Stay in window</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-sky-200 mr-2">•</span>
+                      <span className="text-white mr-2">•</span>
                       <span><strong className="text-white">Work alone</strong> - No others in camera</span>
                     </li>
                   </ul>
@@ -286,7 +282,7 @@ export default function PreInterviewPage() {
 
           {/* Footer */}
           <div
-            className={`bg-[#020b1a]/80 border border-cyan-400/20 rounded-b-2xl p-6 backdrop-blur-xl ${mounted ? 'float-in' : 'opacity-0'}`}
+            className={`bg-black border border-white/20 rounded-b-lg p-6 ${mounted ? 'float-in' : 'opacity-0'}`}
             style={{ animationDelay: '550ms' }}
           >
             <button
@@ -294,8 +290,8 @@ export default function PreInterviewPage() {
               disabled={!allRequirementsMet}
               className={`w-full py-3.5 px-6 rounded font-semibold text-sm transition-all ${
                 allRequirementsMet
-                  ? 'bg-gradient-to-r from-sky-500 to-cyan-400 text-white shadow-[0_15px_35px_rgba(14,165,233,0.35)] hover:brightness-110 cursor-pointer'
-                  : 'bg-slate-800 text-slate-500 cursor-not-allowed border border-white/10'
+                  ? 'bg-white text-black hover:bg-gray-200 cursor-pointer'
+                  : 'bg-gray-900 text-gray-600 cursor-not-allowed border border-white/10'
               }`}
             >
               {allRequirementsMet ? (
@@ -310,7 +306,7 @@ export default function PreInterviewPage() {
               )}
             </button>
 
-            <div className="mt-4 flex items-center justify-center space-x-2 text-xs text-slate-400">
+            <div className="mt-4 flex items-center justify-center space-x-2 text-xs text-gray-500">
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
